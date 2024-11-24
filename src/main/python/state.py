@@ -12,7 +12,7 @@ class State:
         self._sound = pygame.mixer.Sound(sound_file_path) if sound_file_path is not None else None
         self._font: Font = pygame.font.SysFont('monospace', font_size)
         self._reset()
-        self._last_rendered_at = unix_epoch_sec_now()-10
+        self._last_rendered_at = unix_epoch_sec_now() - 10
         self._mark_needs_rerender()
 
     def _stop_sound(self) -> None:
