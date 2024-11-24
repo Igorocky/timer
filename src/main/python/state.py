@@ -12,6 +12,7 @@ class State:
         self._sound = pygame.mixer.Sound(sound_file_path) if sound_file_path is not None else None
         self._font: Font = pygame.font.SysFont('monospace', font_size)
         self._reset()
+        self._last_rendered_at = unix_epoch_sec_now()-10
         self._mark_needs_rerender()
 
     def _stop_sound(self) -> None:
@@ -38,7 +39,7 @@ class State:
         cur_dur = min(self._max_dur, cur_time - self._started_at)
         if cur_dur == self._max_dur and not self._sound_played:
             self._play_sound()
-        if self._cur_dur != cur_dur:
+        if self._cur_dur != cur_dur or cur_time - self._last_rendered_at > 0:
             self._cur_dur = cur_dur
             self._mark_needs_rerender()
 
@@ -54,6 +55,7 @@ class State:
         text_rect.left = int(window_width / 2 - text_width / 2)
         text_rect.top = int(window_height / 2 - text_height / 2)
         disp.blit(text_surf, text_rect)
+        self._last_rendered_at = unix_epoch_sec_now()
 
     def on_key_pressed(self, key: int) -> None:
         if key == pg.K_RETURN:

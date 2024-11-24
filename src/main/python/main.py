@@ -4,8 +4,12 @@ import pygame
 import pygame.locals as pg
 from pygame import Surface, SurfaceType
 
+from arg_parser import make_argument_parser
 from common import GRAY
 from state import State
+
+args = make_argument_parser().parse_args()
+# args = make_argument_parser().parse_args(r'--time 5 --sound file.wav'.split())
 
 pygame.init()
 pygame.font.init()
@@ -20,7 +24,7 @@ pygame.display.set_caption('Timer')
 
 
 def main() -> None:
-    state = State(seconds=3, font_size=300, sound_file_path=None)
+    state = State(seconds=args.time, font_size=args.font, sound_file_path=args.sound)
     while True:
         state.update()
         handle_events(state)
