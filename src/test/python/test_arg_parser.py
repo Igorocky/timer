@@ -34,7 +34,7 @@ class CommonTest(TestCase):
         help_output = StringIO()
 
         # when
-        args = parser.print_help(help_output)
+        parser.print_help(help_output)
 
         # then
         self.assertEqual(

@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from common import seconds_to_hms, hms_to_seconds
+from common import seconds_to_hms, hms_to_seconds, str_to_hms
 
 
 class CommonTest(TestCase):
@@ -27,3 +27,10 @@ class CommonTest(TestCase):
         self.assertEqual(60*60+60, hms_to_seconds((1,1,0)))
         self.assertEqual(60*60+61, hms_to_seconds((1,1,1)))
         self.assertEqual(60*60+60+59, hms_to_seconds((1,1,59)))
+
+    def test_str_to_hms(self) -> None:
+        self.assertEqual((0,0,0), str_to_hms('0'))
+        self.assertEqual((0,0,4), str_to_hms('4'))
+        self.assertEqual((0,0,0), str_to_hms('0:0'))
+        self.assertEqual((0,2,30), str_to_hms('2:30'))
+        self.assertEqual((5,21,39), str_to_hms('5:21:39'))

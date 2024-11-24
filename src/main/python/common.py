@@ -2,6 +2,7 @@ import datetime
 import math
 import time
 from typing import Tuple
+from warnings import catch_warnings
 
 WHITE = (255, 255, 255)
 YELLOW = (234, 221, 202)
@@ -39,3 +40,18 @@ def seconds_to_hms(seconds: int) -> Tuple[int, int, int]:
 
 def hms_to_seconds(hms: Tuple[int, int, int]) -> int:
     return hms[0] * _seconds_in_hour + hms[1] * _seconds_in_minute + hms[2]
+
+def str_to_hms(text:str) -> Tuple[int, int, int]:
+    parts = [part.strip() for part in text.split(':')]
+    if len(parts) < 1:
+        raise Exception(f'len(parts) < 1 in "${text}"')
+    if len(parts) > 3:
+        raise Exception(f'len(parts) > 3 in "${text}"')
+    for part in parts:
+        try:
+            int(part)
+        except Exception:
+            raise Exception(f'Cannot parse number "${text}"')
+    while len(parts) < 3:
+        parts.insert(0,'0')
+    return tuple(int(p) for p in parts) # type: ignore[return-value]
