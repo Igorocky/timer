@@ -9,6 +9,7 @@ from state import State
 
 pygame.init()
 pygame.font.init()
+pygame.mixer.init()
 
 FPS = 10
 fpsClock = pygame.time.Clock()
@@ -19,7 +20,7 @@ pygame.display.set_caption('Timer')
 
 
 def main() -> None:
-    state = State(seconds=120, sound_file_path='')
+    state = State(seconds=3, font_size=300, sound_file_path=None)
     while True:
         state.update()
         handle_events(state)
@@ -35,7 +36,7 @@ def handle_events(state: State) -> None:
             if event.key == pg.K_ESCAPE:
                 shutdown()
             else:
-                print(f'{event.key=}')
+                state.on_key_pressed(event.key)
 
 
 def render_state(state: State) -> None:

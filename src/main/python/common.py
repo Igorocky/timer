@@ -12,6 +12,9 @@ DARK_GRAY = (70, 70, 70)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 
+ON_TRACK = GREEN
+RUN_OUT_OF_TIME = (210, 4, 45)
+
 _seconds_in_minute = 60
 _minutes_in_hour = 60
 _seconds_in_hour = _seconds_in_minute * _minutes_in_hour
@@ -33,5 +36,6 @@ def seconds_to_hms(seconds: int) -> Tuple[int, int, int]:
 
     return hours, minutes, seconds
 
-def hms_to_seconds(hms:Tuple[int, int, int]) -> int:
-    return hms[0]*_seconds_in_hour + hms[1]*_seconds_in_minute + hms[2]
+
+def hms_to_seconds(hms: Tuple[int, int, int]) -> int:
+    return hms[0] * _seconds_in_hour + hms[1] * _seconds_in_minute + hms[2]
