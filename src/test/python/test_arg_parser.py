@@ -13,7 +13,7 @@ class CommonTest(TestCase):
         args = parser.parse_args(['--time', '2:30', '-f', '100', '--sound', '/some/path/file.wav'])
 
         # then
-        self.assertEqual('2:30', args.time)
+        self.assertEqual(150, args.time)
         self.assertEqual(100, args.font)
         self.assertEqual('/some/path/file.wav', args.sound)
 
@@ -25,7 +25,7 @@ class CommonTest(TestCase):
         args = parser.parse_args(['--time', '2:30'])
 
         # then
-        self.assertEqual('2:30', args.time)
+        self.assertEqual(150, args.time)
         self.assertEqual(None, args.sound)
 
     def test__make_argument_parser__prints_help(self) -> None:

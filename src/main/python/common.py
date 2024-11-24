@@ -50,8 +50,8 @@ def str_to_hms(text:str) -> Tuple[int, int, int]:
     for part in parts:
         try:
             int(part)
-        except Exception:
-            raise Exception(f'Cannot parse number "${text}"')
+        except ValueError:
+            raise ValueError(f'Cannot parse number "${text}"')
     while len(parts) < 3:
         parts.insert(0,'0')
     return tuple(int(p) for p in parts) # type: ignore[return-value]
